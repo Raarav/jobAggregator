@@ -22,12 +22,19 @@ function cb(err,response, html){
 
 function parseHtmlPage(html){
     console.log("Parsing Html");
-    let $ = cheerio.load("html");
+    let $ = cheerio.load(html);
     console.log("''''''''''''''''");
-    links = [];
-    let AllJobs = $(".col-md-12").find("data-v-3973e5ee");
-    AllJobs.each(function(){
-        let link = $
-    })
+    // links = [];
+    let AllJobs = $('.card-panel');
+    console.log(AllJobs.length);
+    // $(AllJobs).each(function(){
+    //     let link = $();
+    // })
+    for(let i=0;i<AllJobs.length;i++)
+    {
+        let jobTitle = $(AllJobs[i]).find('.job-tittle h3 a');
+        let link = $(jobTitle).attr('href');
+        console.log($(jobTitle).text()+" "+link); 
+    }
 }
     

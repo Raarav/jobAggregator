@@ -19,7 +19,7 @@ function cb(err,response, html){
         console.log(response.statusCode);
     }
 }
-
+let arr = [];
 function parseHtmlPage(html){
     console.log("Parsing Html");
     let $ = cheerio.load(html);
@@ -34,7 +34,16 @@ function parseHtmlPage(html){
     {
         let jobTitle = $(AllJobs[i]).find('.job-tittle h3 a');
         let link = $(jobTitle).attr('href');
-        console.log($(jobTitle).text()+" "+link); 
+        console.log($(jobTitle).text()+" "+link);
+        let obj = {
+            title: $(jobTitle).text(),
+            link: link
+        } ;
+        arr.push(obj);
     }
+    // console.table(arr);
+    fs.writeFileSync("main.txt",arr);
+    console.log(fs.readFileSync("main.txt","utf8"));
+
 }
     

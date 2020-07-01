@@ -3,7 +3,7 @@ let request = require("request");
 let cheerio = require("cheerio");
 console.log("Sending Request");
 let url = "https://www.monsterindia.com/search/it-computers-software-jobs?searchId=79207d2d-7bea-408b-8d4a-f4bf5cf3e2ad"
-
+let gObj ={}
 request(url,cb);
 function cb(err,response, html){
     console.log("Recieved Response");
@@ -39,11 +39,23 @@ function parseHtmlPage(html){
             title: $(jobTitle).text(),
             link: link
         } ;
-        arr.push(obj);
+        // let job = "Title : "+obj.title+" "+"\nLink : "+obj.link+"\n\n"
+        // arr.push(job);
+        
+        Gobj[obj.title].push(obj.link)
     }
-    // console.table(arr);
-    fs.writeFileSync("main.txt",arr);
+    console.table(arr);
+    fs.writeFileSync("main.txt",arr,{ 
+        encoding: "utf8", 
+        flag: "w", 
+        mode: 0o666 
+      });
     console.log(fs.readFileSync("main.txt","utf8"));
 
 }
     
+
+Gobj = {
+    "IT re":["links1",link2],
+    "IT re":["links1",link2]
+}
